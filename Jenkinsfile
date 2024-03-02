@@ -1,4 +1,4 @@
-pipeline {
+ pipeline {
     agent any
     
     stages {
@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     echo "hello capybara"
-                    sleep 5
+                    sh "ls"
                 }
             }
         }
