@@ -6,6 +6,7 @@ pipeline {
             steps {
                 script {
                     echo "hello capybara"
+                    sleep 5
                 }
             }
         }
