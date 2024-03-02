@@ -6,7 +6,7 @@
             steps {
                 script {
                     echo "hello capybara"
-                    sh "ls -la"
+                    sh "ls"
                 }
             }
         }
