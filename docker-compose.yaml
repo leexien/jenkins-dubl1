@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile_jenkins
+    container_name: jenkins
+    privileged: true
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - /home/${myname}/jenkins_compose/jenkins_configuration:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+        
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile_ssh-agent
+    container_name: agent
+    privileged: true
+    expose:
+      - 22
+    environment:
+      - JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDbTnNY5qy7IbmpCxZEQCxqrtq1A51aRYYJ7Aq+8+u7raHQl+qN3NN2SAQHSMXWhqxVbZ8ZrgZyqVVjuY432G2iNtr/7ucua7anYSaCIxtyRi4TFCgi5h3ExxIUAvliyanJRR1JZQVlpqz93HtYL2SaF0XAVCVMulUP8hTRi6XLFYEz2s2TDQzZZrYHbBOxYJAv9bcrYDH6WP3/nvbcoTK6gB81oTFvhfm0hwMR8vyvJog/5B+R/fDp1MCEdOUE9WIQqk5SkbOix5Q+VIAe6n4tebNJ7OTHNPPUnZCJ4TXRErnPLsRDRuXrhgTyLdAmHL3TLdGfZn1S+/hs1k3dvw1aB6luXKqA5pMyPW3fnZGn23vNCt7wlUaSBFAm6K+QCnjsBEEl6fDN3bvkNpoKV1tDESzIOif+urkxV5baeVJxImOu4SbzQhMwcQfrFCjFVBx1YBrlGUXwS/55so+78ycOPU9b5/sAduzC5WZ0q8AYMm3y97IGOGVt5Q527kr6QEk=
+
+
