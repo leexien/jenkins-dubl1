@@ -1,14 +1,14 @@
 pipeline {
     agent any
     triggers {
-        GenericTrigger(
-            genericVariables: [
-                [key: 'targetBranchName', value: '$.body.pull_request.base.ref'],
-                [key: 'sourseBranchName', value: '$.body.pull_request.head.ref'],
+    GenericTrigger(
+        genericVariables: [
+            [defaultValue: '', key: 'base', regexpFilter: '', value: '$.ref'],
             ],
-            token: 'my-webhook-token'
-        )
-    }
+     causeString: 'Triggered on $ref',
+     token: 'my-webhook-token',
+     tokenCredentialId: '' )
+  }
     stages {
         stage('Check branch name') {
             steps {
